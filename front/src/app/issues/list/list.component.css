@@ -1,0 +1,15 @@
+::ng-deep tbody tr {
+  cursor: pointer;
+}
+::ng-deep td.ng-star-inserted {
+  max-width: 200px;
+  overflow-x: scroll;
+}
+
+::ng-deep tbody tr:hover {
+  background-color: rgb(241, 231, 231);
+}
+
+::ng-deep img{
+  max-width:70%;
+}

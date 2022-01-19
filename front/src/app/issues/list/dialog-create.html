@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Create</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-select placeholder="Reporter" [(ngModel)]="data.issue.reporter_id">
+      <mat-option *ngFor="let item of data.reporters" [value]="item.id">{{ item.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <textarea matInput placeholder="Description" [(ngModel)]="data.issue.description"></textarea>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Status" [(ngModel)]="data.issue.status_id">
+      <mat-option *ngFor="let item of data.statuses" [value]="item.id">{{ item.title }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div>
+    <input type="file" placeholder="Enter Image" (change)="onFileChange($event)" accept=".gif,.jpeg,,.png" autocomplete="off">
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onClick(data.issue)" tabindex="2">Ok</button>
+  <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+</div>
