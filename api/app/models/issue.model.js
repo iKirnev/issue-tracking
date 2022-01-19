@@ -22,10 +22,11 @@ Issue.create = (newIssue, result) => {
 };
 
 Issue.getLast = (query, result) => {
-  let where = 'WHERE 1=1'
-  if (query.name) where += ` AND name LIKE '%${query.name}%'`;
-  if (query.description) where += ` AND description LIKE '%${query.description}%'`;
-  if (query.status) where += ` AND title LIKE '%${query.status}%'`;
+  let where = 'WHERE 1=1';
+  let params = [];
+  if (query.name) { where += ' AND name LIKE ? '; params.push(`%${ query.name }%`); };
+  if (query.description) { where += ' AND description LIKE ? '; params.push(`%${ query.description }%`); };
+  if (query.status) { where += ' AND title LIKE ? '; params.push(`%${ query.status }%`); };
 
   let q = `
       SELECT i.*, r.name, s.title AS status FROM issues i
@@ -36,7 +37,7 @@ Issue.getLast = (query, result) => {
       LIMIT 25
   `;
   
-  sql.query(q, (err, res) => {
+  sql.query(q, params, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
